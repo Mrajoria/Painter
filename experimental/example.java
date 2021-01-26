@@ -15,6 +15,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
+import javax.swing.BoxLayout;
+
 import java.awt.event.WindowAdapter;
 
 
@@ -36,7 +39,8 @@ public class example extends Canvas
 	Frame f;
 	Button b1;
 	Button b2;
-	Panel draw;
+	Panel ControlPanel;
+	DrawPanel dp;
 	boolean val = false;
 	                                                                                                                      
 	
@@ -47,11 +51,29 @@ public class example extends Canvas
 	example(){
 		
 	f = new Frame();
-	
+	f.setSize(800,400);
 	p = new Panel();
 	
+	Dimension controlPanelDimension = new Dimension(f.getWidth(),f.getHeight()/5);
+	this.setPreferredSize(controlPanelDimension);
+	
+	
+	
+	ControlPanel = new Panel();
+	dp = new DrawPanel();
+	
+	
+	ControlPanel.setLayout(new BoxLayout(ControlPanel, BoxLayout.Y_AXIS));
+	ControlPanel.add(this);
+	dp.setPreferredSize(new Dimension(f.getWidth(),f.getHeight()-57));
+	
+	ControlPanel.add(dp);
+	
+	
+	
+	
 	 
-	f.setSize(800,400);
+	
 	
 	
     o = new outerwindow(this);
@@ -87,41 +109,15 @@ public class example extends Canvas
   this.addMouseListener(new MouseAdapter() {
 	  public void mouseClicked(MouseEvent e) {
 		  if(val == true) {
-			  
-			   px = e.getX();
-			   py = e.getY();
 			 pxclick = e.getX();
 			  pyclick = e.getY();
-
-			  
-			  if(px>0 && px<583 && py>63 && py<359 ) {
-				  
-			 System.out.println("Showing click cords "+px+" "+py);
-			 repaint(0,64,583,359);
-			 }
-			  else
-				 pxclick = e.getX();
-			  pyclick = e.getY();
-				  repaint(3+DrawFlag,3,61,61);
-			      repaint(0,64,583,359);
+				  repaint();
+	//		      repaint(0,64,583,359);
 			  
 		  }
 	  }
  });
-  this.addMouseMotionListener(new MouseAdapter(){
-	   public void mouseDragged(MouseEvent e) {
-		 
-		   
-		   if(xnew>=3 && xnew<583 && ynew>=63 && ynew<359 )
-		   
-		   xnew = e.getX();
-		   ynew = e.getY();
-		   System.out.println("Drag registered, showing current cords "+xnew+" "+ynew);
-		  repaint(0,64,583,358);
-
-	   }
-	   
-   } );
+  
    
   b2.addMouseListener(new MouseAdapter() {
 	  
@@ -135,7 +131,9 @@ public class example extends Canvas
 	  
   });
   
-    f.add(this);                             // BE CAREFULL WITH FRAME.ADD, if u add canvas or any component before and start adding other components later, it will not show;
+     f.add(ControlPanel, BorderLayout.CENTER);
+     
+    //f.add(this);                            // BE CAREFULL WITH FRAME.ADD, if u add canvas or any component before and start adding other components later, it will not show;
     f.add(p, BorderLayout.WEST);          // frame.add should only be used when u arent adding other components whose size will block your component [canvas, here] 
     f.addWindowListener(o);
     f.setVisible(true);
@@ -173,7 +171,7 @@ public class example extends Canvas
 				}
 			DrawFlag = i;
 			System.out.println("Lets see which icon was clicked: "+DrawFlag);
-			if(i!=1000) {
+			if(i!=1000 && i!=-1) {
 			g.setColor(Color.red);
 			g.fillRect(3+i*65, 3, 61, 61);    //3,3 to 2,2 and 61 widht height to 63
 			g.drawImage(this.bimg.b[i].img, 5+i*65, 5, 57, 57, this);
@@ -181,19 +179,8 @@ public class example extends Canvas
 			}
 		}
 		
-		else 
-		{
-			if(DrawFlag ==0 && val==true) {
-				
-				g.setColor(Color.red);
-				g.fillRect(3+DrawFlag*65, 3, 61, 61);
-				g.drawImage(this.bimg.b[DrawFlag].img, 5+DrawFlag*65, 5, 57, 57, this);
-				g.drawLine(px, py, xnew, ynew);
-				
-			}
 			
 		}
-	}
 
     public static void main(String args[]) {
     	example e = new example();
