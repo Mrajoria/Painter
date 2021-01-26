@@ -26,10 +26,12 @@ public class example extends Canvas
 	customButton b[];
 	buttonImage bimg;
 	
-	int px =0;
-	int py = 0;
-	int xnew = 0;
-	int ynew = 0;
+	int px =3;
+	int py = 63;
+	int xnew = 3;
+	int ynew = 63;
+	int pxclick = 0;
+	int pyclick =0;
 	
 	Frame f;
 	Button b1;
@@ -85,25 +87,38 @@ public class example extends Canvas
   this.addMouseListener(new MouseAdapter() {
 	  public void mouseClicked(MouseEvent e) {
 		  if(val == true) {
-			
-			 px =  e.getX();
-			 py = e.getY();
+			  
+			   px = e.getX();
+			   py = e.getY();
+			 pxclick = e.getX();
+			  pyclick = e.getY();
+
+			  
+			  if(px>0 && px<583 && py>63 && py<359 ) {
+				  
 			 System.out.println("Showing click cords "+px+" "+py);
-			 
-			 repaint();
-			 
-			}
+			 repaint(0,64,583,359);
+			 }
+			  else
+				 pxclick = e.getX();
+			  pyclick = e.getY();
+				  repaint(3+DrawFlag,3,61,61);
+			      repaint(0,64,583,359);
+			  
+		  }
 	  }
  });
   this.addMouseMotionListener(new MouseAdapter(){
 	   public void mouseDragged(MouseEvent e) {
+		 
+		   
+		   if(xnew>=3 && xnew<583 && ynew>=63 && ynew<359 )
 		   
 		   xnew = e.getX();
 		   ynew = e.getY();
 		   System.out.println("Drag registered, showing current cords "+xnew+" "+ynew);
-		//   draw(xnew, ynew);
-		   
-		  repaint(0,61,400,200);
+		  repaint(0,64,583,358);
+
 	   }
 	   
    } );
@@ -139,12 +154,12 @@ public class example extends Canvas
 		x++;
 		}
 		
-		if(px>5 &&px<581 &&py>5 && py<58) {
+		if(pxclick>5 &&pxclick<581 &&pyclick>5 && pyclick<58) {
 			
 			
 			int i=0;
-			while(px-(5+i*65) >=0) {
-				if(px-(5+i*65)< 57) {
+			while(pxclick-(5+i*65) >=0) {
+				if(pxclick-(5+i*65)< 57) {
 					break;
 				}
 				
@@ -160,7 +175,7 @@ public class example extends Canvas
 			System.out.println("Lets see which icon was clicked: "+DrawFlag);
 			if(i!=1000) {
 			g.setColor(Color.red);
-			g.fillRect(2+i*65, 2, 63, 63);    //3,3 to 2,2 and 61 widht height to 63
+			g.fillRect(3+i*65, 3, 61, 61);    //3,3 to 2,2 and 61 widht height to 63
 			g.drawImage(this.bimg.b[i].img, 5+i*65, 5, 57, 57, this);
 			
 			}
