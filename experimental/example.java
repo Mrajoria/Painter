@@ -60,7 +60,7 @@ public class example extends Canvas
 	
 	
 	ControlPanel = new Panel();
-	dp = new DrawPanel();
+	dp = new DrawPanel(this);
 	
 	
 	ControlPanel.setLayout(new BoxLayout(ControlPanel, BoxLayout.Y_AXIS));

@@ -13,7 +13,4 @@ public class customButton {
 
 	final int spacing = 60;
 	
-
-	
-	
 }
