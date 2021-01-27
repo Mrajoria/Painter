@@ -108,7 +108,7 @@ public class example extends Canvas
   
   this.addMouseListener(new MouseAdapter() {
 	  public void mouseClicked(MouseEvent e) {
-		  if(val == true) {
+		  if(val == true && e.getX()>5 && e.getX()<581 &&e.getY()>5 && e.getY()<58) {
 			 pxclick = e.getX();
 			  pyclick = e.getY();
 				  repaint();
@@ -175,6 +175,7 @@ public class example extends Canvas
 			g.setColor(Color.red);
 			g.fillRect(3+i*65, 3, 61, 61);    //3,3 to 2,2 and 61 widht height to 63
 			g.drawImage(this.bimg.b[i].img, 5+i*65, 5, 57, 57, this);
+			
 			
 			}
 		}
