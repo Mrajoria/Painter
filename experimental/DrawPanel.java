@@ -14,9 +14,7 @@ public class DrawPanel extends Panel {
 	
 	example reference;
 	int clicks =0;
-	int drags =-1;
-	int currentdX =-1;
-	int currentdY = -1;
+	int drags =0;
 	
 
 	ArrayList xclickPositions;
@@ -27,7 +25,12 @@ public class DrawPanel extends Panel {
 	boolean isClickInitialised = false;
 	
 	ArrayList Keyvalues;
-	int temp =0;
+	int clickX = -1;
+	int clickY = -1;
+	
+	int dragX =-1;
+	int dragY =-1;
+	
 	boolean flag = false;
 	
 	DrawPanel(example se)
@@ -40,19 +43,17 @@ public class DrawPanel extends Panel {
 		this.ydragPositions = new ArrayList();
 		
 		this.Keyvalues = new ArrayList();
-		Keyvalues.add(0, 0);
 		
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 				if (reference.val == true && reference.DrawFlag>=0 && reference.DrawFlag<=9 ) {
-			    if (flag == true && drags>=0) {
-			    	
-			    	
-			//		Keyvalues.add(clicks, drags ); 
-				    System.out.println("lets see key values for each x and each y clicked: "+xclickPositions.get(clicks)+" "+yclickPositions.get(clicks)+" "+Keyvalues.get(clicks));
+			    if (flag == true) {
 			    	clicks++;
 			    }
+			    clickX =e.getX();
+			    clickY =e.getY();
+			    
 				xclickPositions.add(clicks, e.getX());
 				yclickPositions.add(clicks, e.getY());
 	
@@ -70,23 +71,44 @@ public class DrawPanel extends Panel {
 		
 			public void mouseDragged(MouseEvent e) {
 				
-				if(isClickInitialised == true && reference.val == true && reference.DrawFlag >=0 && reference.DrawFlag<=9) {
+				if(xclickPositions.size()>=1  && reference.val == true && reference.DrawFlag >=0 && reference.DrawFlag<=9) {
 				
 			if(e.getX()>=0 &&e.getX()<=581   && e.getY()>=0  &&e.getY()<=292) {	
-
-				currentdX++;
-				currentdY++;
 				
-			    drags++;
+				if(reference.DrawFlag ==0) {
+				
+				dragX = e.getX();
+				dragY =e.getY();
 			   xdragPositions.add(drags, e.getX());
 			   ydragPositions.add(drags, e.getY());
-			   Keyvalues.add(clicks, drags );
+			   System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
+			   Keyvalues.add(clicks, drags ); 
 
-	    	 System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
-			flag = true;
-			
+			   drags++;
+			   isClickInitialised =false;
+			   flag = true;
+			   repaint();
+				}
+				
+				else if(reference.DrawFlag >=1 && reference.DrawFlag <=5) {
+				 if(isClickInitialised == true && xclickPositions.size()>=2) {
+					 drags++;
+				 }
+				 dragX = e.getX();
+				 dragY =e.getY();
+				 xdragPositions.add(drags, e.getX());
+				 ydragPositions.add(drags, e.getY());
+				 System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
+				 Keyvalues.add(clicks, drags ); 
+
+				 
+				 flag = true;
+				 isClickInitialised =false;
+				 repaint();
+				}
+			    System.out.println("lets see key values for each x and each y clicked: "+xclickPositions.get(clicks)+" "+yclickPositions.get(clicks)+" "+Keyvalues.get(clicks));
+				  
 			repaint();
-			
 			
 			}
 			
@@ -99,64 +121,49 @@ public class DrawPanel extends Panel {
 	
 	
 	
-	public void paint (Graphics g ) {
+	public void update (Graphics g ) {
 		
 		if(this.reference.DrawFlag ==0  && this.reference.val == true) {
 		
-			g.setColor(Color.red);
-		
-			
-			if(Keyvalues.size()>=1) {
-			
-			for(int i=0;i<xclickPositions.size();i++) {
-				for(int j=0;j<(int)Keyvalues.get(i);j++) {
-					
-					g.drawLine((int)xdragPositions.get(j), (int)ydragPositions.get(j) , (int)xdragPositions.get(j), (int)ydragPositions.get(j));
-					
-					
-				}
-			}
-			}
-		
-			System.out.println("inside paint, see coords "+xdragPositions.get(currentdX)+" "+ydragPositions.get(currentdY));
-		
-			
-		//	g.fillOval((int)xdragPositions.get(currentdX), (int)ydragPositions.get(currentdY), 5,5);
-			
-			
-		}
-		
-		
+			int i=0;
+			int j=0;
+			g.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-		if(this.reference.DrawFlag ==1  && this.reference.val == true) {
-			
-		
-        if(Keyvalues.size()>=1) {
-				
-				int i =0;
-				int j=0;
 			while(i<xclickPositions.size()) {
-			 while(j<(int)Keyvalues.get(i))	{
-				 
-					g.drawLine((int)xclickPositions.get(i),(int)yclickPositions.get(i),(int)xdragPositions.get(j), (int)ydragPositions.get(j));
+				
+				while(j<(int)Keyvalues.get(i)) {
+					g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),5,5);
 					j++;
-			 }
-			 i++;
+				}
+				i++;
 			}
-		}
-        
-   		g.drawLine((int)xclickPositions.get(clicks),(int)yclickPositions.get(clicks),(int)xdragPositions.get(currentdX), (int)ydragPositions.get(currentdY));
-	
 			
 		}
 		
-		
-		
+		if(this.reference.DrawFlag ==1  && this.reference.val == true) {
+		    
+	     	g.clearRect(0, 0 ,this.getWidth(), this.getHeight());
+
+			int i=0;
+			int j=0;
+			if(xclickPositions.size()>1) {
+			while(i<xclickPositions.size()) {
+				
+				while(j<=(int)Keyvalues.get(i)) {
+					g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
+					
+					j++;
+				}
+				i++;
+			}
+		    
+		   }
+				g.drawLine(clickX, clickY,dragX,dragY);
+			
+		}
 		
    
+	
 	}
 	
-	
-	
-
-}
+	}

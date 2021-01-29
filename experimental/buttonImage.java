@@ -41,7 +41,7 @@ public class buttonImage  {
 			}
 			add ="";
 			s ="C:/Users/malware/Desktop/";
-			bimgs[x].img = new BufferedImage(50,40,BufferedImage.TYPE_INT_ARGB);
+			bimgs[x].img = new BufferedImage(51,51,BufferedImage.TYPE_INT_ARGB);
 			
 			 try {
 		         bimgs[x].img = ImageIO.read(bimgs[x].f);
