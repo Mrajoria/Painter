@@ -16,7 +16,8 @@ public class DrawPanel extends Panel {
 	int clicks =0;
 	int drags =0;
 	
-
+	Color c = new Color(0,0,0);
+	
 	ArrayList xclickPositions;
 	ArrayList yclickPositions;
 	
@@ -123,6 +124,7 @@ public class DrawPanel extends Panel {
 	
 	public void update (Graphics g ) {
 		
+		g.setColor(c);
 		if(this.reference.DrawFlag ==0  && this.reference.val == true) {
 		
 			int i=0;
@@ -132,6 +134,7 @@ public class DrawPanel extends Panel {
 			while(i<xclickPositions.size()) {
 				
 				while(j<(int)Keyvalues.get(i)) {
+					g.setColor(c);
 					g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),5,5);
 					j++;
 				}
@@ -146,10 +149,11 @@ public class DrawPanel extends Panel {
 
 			int i=0;
 			int j=0;
-			if(xclickPositions.size()>1) {
+	//		if(xclickPositions.size()>1) {
 			while(i<xclickPositions.size()) {
 				
 				while(j<=(int)Keyvalues.get(i)) {
+					g.setColor(c);
 					g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
 					
 					j++;
@@ -157,13 +161,70 @@ public class DrawPanel extends Panel {
 				i++;
 			}
 		    
-		   }
-				g.drawLine(clickX, clickY,dragX,dragY);
+		//   }
+			//	g.drawLine(clickX, clickY,dragX,dragY);
 			
 		}
+		
+		if(this.reference.DrawFlag ==2 || this.reference.DrawFlag ==4) {
+			
+			  int i=0;
+			  int j=0;
+			  g.clearRect(0, 0, this.getWidth(), this.getHeight());
+			 
+              while(i<xclickPositions.size()) {           
+			  while(j<=(int)Keyvalues.get(i)) {
+				  
+				      g.setColor(c);
+					  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+				      j++;
+				  }
+			  i++;
+			  }
+			 
+			}
+		
+		if(this.reference.DrawFlag == 3 || this.reference.DrawFlag ==5) {
+			int i=0;
+			int j=0;
+			g.clearRect(0, 0, this.getWidth(), this.getHeight());
+			 while(i<xclickPositions.size()) {           
+				  while(j<=(int)Keyvalues.get(i)) {
+					      g.setColor(c);
+						  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+					      j++;
+					  }
+				  i++;
+				  }
+				 
+				}
+		
+		if(this.reference.DrawFlag >=6  && this.reference.DrawFlag<=8 ) {
+			int code = this.reference.DrawFlag;
+			
+			if(code == 6) {
+				c = new Color(255,0,0);
+			}
+			else	if(code == 7) {
+				c = new Color(0,0,255);
+				
+			}
+			
+			else if (code ==8) {
+				c =new Color(0,255,0);
+				
+			}
+			g.setColor(c);
+			
+			
+		}
+			
+		}
+		
+		
 		
    
 	
 	}
 	
-	}
+	
