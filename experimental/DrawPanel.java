@@ -144,10 +144,28 @@ public class DrawPanel extends Panel {
 			while(i<xclickPositions.size()) {
 				
 				while(j<(int)Keyvalues.get(i)) {
-					g.setColor(c);
-					g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
-					j++;
-				}
+					
+			
+					if((int)WhichIconNumber.get(j) ==0) {
+						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
+						j++;
+					}
+					
+					else if((int)WhichIconNumber.get(j) == 1) {
+						g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
+                        j++;
+						
+					}
+					else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
+						  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+                          j++;
+					}
+					else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
+						  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+                          j++;
+					}
+					}
+					
 				i++;
 			}
 			
@@ -163,10 +181,26 @@ public class DrawPanel extends Panel {
 			while(i<xclickPositions.size()) {
 				
 				while(j<=(int)Keyvalues.get(i)) {
-					g.setColor(c);
-					g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
 					
-					j++;
+					if((int)WhichIconNumber.get(j) ==0) {
+						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
+						j++;
+					}
+					
+					else if((int)WhichIconNumber.get(j) == 1) {
+						g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
+                        j++;
+						
+					}
+					else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
+						  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+                          j++;
+					}
+					else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
+						  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+                          j++;
+					}
+					
 				}
 				i++;
 			}
@@ -185,9 +219,26 @@ public class DrawPanel extends Panel {
               while(i<xclickPositions.size()) {           
 			  while(j<=(int)Keyvalues.get(i)) {
 				  
-				      g.setColor(c);
-					  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
-				      j++;
+				  
+				  if((int)WhichIconNumber.get(j) ==0) {
+						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
+						j++;
+					}
+					
+					else if((int)WhichIconNumber.get(j) == 1) {
+					 	g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
+                        j++;
+						
+					}
+					else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
+						g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+                        j++;
+					}
+					else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
+					    g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+                        j++;
+					}
+				 
 				  }
 			  i++;
 			  }
@@ -200,10 +251,27 @@ public class DrawPanel extends Panel {
 			g.clearRect(0, 0, this.getWidth(), this.getHeight());
 			 while(i<xclickPositions.size()) {           
 				  while(j<=(int)Keyvalues.get(i)) {
-					      g.setColor(c);
-						  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
-					      j++;
-					  }
+					  
+					  if((int)WhichIconNumber.get(j) ==0) {
+							g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
+							j++;
+						}
+						
+						else if((int)WhichIconNumber.get(j) == 1) {
+							g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
+	                        j++;
+							
+						}
+						else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
+							  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+	                          j++;
+						}
+						else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
+							  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
+	                          j++;
+						}
+					
+				  }
 				  i++;
 				  }
 				 
