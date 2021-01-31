@@ -22,6 +22,7 @@ import java.awt.event.WindowAdapter;
 
 
 
+@SuppressWarnings("serial")
 public class example extends Canvas  
 
 {
@@ -201,7 +202,7 @@ public class example extends Canvas
     		e.bimg.b[x] = new buttonImage();
     	}
     	e.bimg.createImages(e.bimg.b);
-    	e.repaint();                       //component.setvisible also calls paints; why it is not working here, why I have to use repaint on this component
+    	e.repaint();                       //component.setvisible also calls paint(); why it is not working here, why I have to use repaint on this component
     
     }
     	

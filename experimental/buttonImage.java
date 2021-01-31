@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.imageio.ImageIO;
 import java.awt.Frame;
 
@@ -14,11 +16,11 @@ import java.awt.Frame;
 
 public class buttonImage  {
 	
+	InputStream input;
 	
-	File f;
 	BufferedImage img;
-	String s ="C:/Users/malware/Desktop/";
-	String add = "";
+	String s ="";
+	String add = "/experimental/resouces/";
 	buttonImage b[];
     Frame frame;	
 	
@@ -33,18 +35,18 @@ public class buttonImage  {
 				
 				System.out.println(s+".png");
 				
-			bimgs[x].f = new File(s+".png");
+			bimgs[x].input = getClass().getResourceAsStream(s+".png");
 		
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
 			add ="";
-			s ="C:/Users/malware/Desktop/";
+			s ="resouces/";
 			bimgs[x].img = new BufferedImage(51,51,BufferedImage.TYPE_INT_ARGB);
 			
 			 try {
-		         bimgs[x].img = ImageIO.read(bimgs[x].f);
+		         bimgs[x].img = ImageIO.read(bimgs[x].input);
 		   
 
 		     } catch (IOException ex) {

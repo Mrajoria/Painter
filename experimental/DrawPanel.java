@@ -81,7 +81,8 @@ public class DrawPanel extends Panel {
 				
 			if(e.getX()>=0 &&e.getX()<=581   && e.getY()>=0  &&e.getY()<=292) {	
 				
-				if(reference.DrawFlag ==0) {
+	        	if(reference.DrawFlag ==0) {
+	        	if(isClickInitialised ==true) {	
 			    drags++;
 				dragX = e.getX();
 				dragY =e.getY();
@@ -92,15 +93,15 @@ public class DrawPanel extends Panel {
 			   WhichColor.add(drags, reference.ColorFlag );
 			   System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
 			   Keyvalues.add(clicks, drags ); 
-			   isClickInitialised =false;
 			   flag = true;
-			   repaint();
-				}
+	     	   repaint();
+	        	}
+	        	}
 				
-				else if(reference.DrawFlag >=1 && reference.DrawFlag <=5) {
-				 if(isClickInitialised == true && xclickPositions.size()>=1) {
+			    if(reference.DrawFlag >=1 && reference.DrawFlag <=5) {
+			    	if(isClickInitialised == true && xclickPositions.size()>=1) {
 					 drags++;
-				 }
+			    	 }
 				 dragX = e.getX();
 				 dragY =e.getY();
 				 xdragPositions.add(drags, e.getX());
@@ -110,21 +111,22 @@ public class DrawPanel extends Panel {
 				 System.out.println("this figure is being drawn:"+(int)WhichIconNumber.get(drags));
 				 System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
 				 Keyvalues.add(clicks, drags ); 
-
+                 
 				 
 				 flag = true;
 				 isClickInitialised =false;
 				 repaint();
+			    	 }
 				}
 				
 			    System.out.println("lets see key values for each x and each y clicked: "+xclickPositions.get(clicks)+" "+yclickPositions.get(clicks)+" "+Keyvalues.get(clicks));
 				  
-			repaint();
+		//	repaint();
 			
 			}
 			
 			}
-			}
+			
 			
 		});
 	}
@@ -147,8 +149,9 @@ public class DrawPanel extends Panel {
 					
 			
 					if((int)WhichIconNumber.get(j) ==0) {
+						
 						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
-						j++;
+						 j++;
 					}
 					
 					else if((int)WhichIconNumber.get(j) == 1) {
@@ -282,18 +285,23 @@ public class DrawPanel extends Panel {
 			
 			if(code == 6) {
 				c = new Color(255,0,0);
+				g.setColor(c);
+				
+				
 			}
 			else	if(code == 7) {
 				c = new Color(0,0,255);
+				g.setColor(c);
+				
 				
 			}
 			
 			else if (code ==8) {
 				c =new Color(0,255,0);
+				g.setColor(c);
+				
 				
 			}
-			g.setColor(c);
-			
 			
 		}
 		
