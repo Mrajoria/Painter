@@ -14,7 +14,7 @@ public class DrawPanel extends Panel {
 	
 	example reference;
 	int clicks =0;
-	int drags =0;
+	int drags =-1;
 	
 	Color c = new Color(0,0,0);
 	
@@ -26,6 +26,9 @@ public class DrawPanel extends Panel {
 	boolean isClickInitialised = false;
 	
 	ArrayList Keyvalues;
+	ArrayList WhichIconNumber;
+	ArrayList WhichColor;
+	
 	int clickX = -1;
 	int clickY = -1;
 	
@@ -43,7 +46,9 @@ public class DrawPanel extends Panel {
 		this.xdragPositions = new ArrayList();
 		this.ydragPositions = new ArrayList();
 		
-		this.Keyvalues = new ArrayList();
+	    this.Keyvalues = new ArrayList();
+	    this.WhichColor = new ArrayList();
+	    this.WhichIconNumber = new ArrayList();
 		
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -77,28 +82,32 @@ public class DrawPanel extends Panel {
 			if(e.getX()>=0 &&e.getX()<=581   && e.getY()>=0  &&e.getY()<=292) {	
 				
 				if(reference.DrawFlag ==0) {
-				
+			    drags++;
 				dragX = e.getX();
 				dragY =e.getY();
 			   xdragPositions.add(drags, e.getX());
 			   ydragPositions.add(drags, e.getY());
+			   WhichIconNumber.add(drags, reference.DrawFlag);
+			   System.out.println("this figure is being drawn:"+(int)WhichIconNumber.get(drags));
+			   WhichColor.add(drags, reference.ColorFlag );
 			   System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
 			   Keyvalues.add(clicks, drags ); 
-
-			   drags++;
 			   isClickInitialised =false;
 			   flag = true;
 			   repaint();
 				}
 				
 				else if(reference.DrawFlag >=1 && reference.DrawFlag <=5) {
-				 if(isClickInitialised == true && xclickPositions.size()>=2) {
+				 if(isClickInitialised == true && xclickPositions.size()>=1) {
 					 drags++;
 				 }
 				 dragX = e.getX();
 				 dragY =e.getY();
 				 xdragPositions.add(drags, e.getX());
 				 ydragPositions.add(drags, e.getY());
+				 WhichIconNumber.add(drags, reference.DrawFlag);
+				 WhichColor.add(drags, reference.ColorFlag );
+				 System.out.println("this figure is being drawn:"+(int)WhichIconNumber.get(drags));
 				 System.out.println("Inside DrawPanel,drag;showing cords and drag count "+xdragPositions.get(drags)+" "+ydragPositions.get(drags)+" "+drags);
 				 Keyvalues.add(clicks, drags ); 
 
@@ -107,6 +116,7 @@ public class DrawPanel extends Panel {
 				 isClickInitialised =false;
 				 repaint();
 				}
+				
 			    System.out.println("lets see key values for each x and each y clicked: "+xclickPositions.get(clicks)+" "+yclickPositions.get(clicks)+" "+Keyvalues.get(clicks));
 				  
 			repaint();
@@ -135,7 +145,7 @@ public class DrawPanel extends Panel {
 				
 				while(j<(int)Keyvalues.get(i)) {
 					g.setColor(c);
-					g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),5,5);
+					g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
 					j++;
 				}
 				i++;
@@ -218,12 +228,9 @@ public class DrawPanel extends Panel {
 			
 			
 		}
-			
+		
 		}
-		
-		
-		
-   
+				
 	
 	}
 	

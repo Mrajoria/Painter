@@ -47,6 +47,7 @@ public class example extends Canvas
 	Panel p;
 	Dimension size;
 	int DrawFlag =-1;
+	int ColorFlag =-1;
 	
 	example(){
 		
@@ -170,6 +171,9 @@ public class example extends Canvas
 					i++;
 				}
 			DrawFlag = i;
+			if(i>=6 &&i<=8) {
+				ColorFlag =i;
+			}
 			System.out.println("Lets see which icon was clicked: "+DrawFlag);
 			if(i!=1000 && i!=-1) {
 			g.setColor(Color.red);
