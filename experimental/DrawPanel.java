@@ -1,15 +1,17 @@
 package experimental;
 
 import java.awt.Panel;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferStrategy;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 
 
 
-public class DrawPanel extends Panel {
+public class DrawPanel extends Canvas {
 	
 	
 	example reference;
@@ -137,6 +139,14 @@ public class DrawPanel extends Panel {
 	public void update (Graphics g ) {
 		
 		g.setColor(c);
+		BufferStrategy bs =  getBufferStrategy();
+		if(bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+		
+		g = bs.getDrawGraphics();
+		
 		if(this.reference.DrawFlag ==0  && this.reference.val == true) {
 		
 			int i=0;
@@ -152,20 +162,22 @@ public class DrawPanel extends Panel {
 						
 						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
 						 j++;
-					}
+						 					}
 					
 					else if((int)WhichIconNumber.get(j) == 1) {
 						g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
                         j++;
-						
+                        
 					}
 					else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
 						  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
                           j++;
+                        
 					}
 					else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
 						  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
                           j++;
+                         
 					}
 					}
 					
@@ -188,20 +200,23 @@ public class DrawPanel extends Panel {
 					if((int)WhichIconNumber.get(j) ==0) {
 						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
 						j++;
+						
 					}
 					
 					else if((int)WhichIconNumber.get(j) == 1) {
 						g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
                         j++;
-						
+                      
 					}
 					else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
 						  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
                           j++;
+                          
 					}
 					else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
 						  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
                           j++;
+                         
 					}
 					
 				}
@@ -226,20 +241,23 @@ public class DrawPanel extends Panel {
 				  if((int)WhichIconNumber.get(j) ==0) {
 						g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
 						j++;
+						
 					}
 					
 					else if((int)WhichIconNumber.get(j) == 1) {
 					 	g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
                         j++;
-						
+                      
 					}
 					else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
 						g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
                         j++;
+                       
 					}
 					else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
 					    g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
                         j++;
+                       
 					}
 				 
 				  }
@@ -258,20 +276,23 @@ public class DrawPanel extends Panel {
 					  if((int)WhichIconNumber.get(j) ==0) {
 							g.fillOval((int)xdragPositions.get(j), (int)ydragPositions.get(j),3,3);
 							j++;
+							
 						}
 						
 						else if((int)WhichIconNumber.get(j) == 1) {
 							g.drawLine((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j), (int)ydragPositions.get(j));
 	                        j++;
-							
+	                       
 						}
 						else if((int)WhichIconNumber.get(j) == 2 || (int)WhichIconNumber.get(j) == 4) {
 							  g.drawRect((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
 	                          j++;
+	                        
 						}
 						else if((int)WhichIconNumber.get(j) ==3 || (int)WhichIconNumber.get(j) ==5) {
 							  g.drawOval((int)xclickPositions.get(i), (int)yclickPositions.get(i), (int)xdragPositions.get(j)-(int)xclickPositions.get(i) , (int)ydragPositions.get(j)-  (int)yclickPositions.get(i) );
 	                          j++;
+	                         
 						}
 					
 				  }
@@ -304,10 +325,13 @@ public class DrawPanel extends Panel {
 			}
 			
 		}
-		
+		 g.dispose();
+		 bs.show();
+
 		}
+	}
 				
 	
-	}
 	
+
 	
