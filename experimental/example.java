@@ -43,7 +43,6 @@ public class example extends Canvas
 	Panel ControlPanel;
 	DrawPanel dp;
 	boolean val = false;
-	                                                                                                                      
 	
 	Panel p;
 	Dimension size;
@@ -59,8 +58,6 @@ public class example extends Canvas
 	Dimension controlPanelDimension = new Dimension(f.getWidth(),f.getHeight()/5);
 	this.setPreferredSize(controlPanelDimension);
 	
-	
-	
 	ControlPanel = new Panel();
 	dp = new DrawPanel(this);
 	
@@ -70,14 +67,6 @@ public class example extends Canvas
 	dp.setPreferredSize(new Dimension(f.getWidth(),f.getHeight()-57));
 	
 	ControlPanel.add(dp);
-	
-	
-	
-	
-	 
-	
-	
-	
     o = new outerwindow(this);
     
     f.setLayout(new BorderLayout());
@@ -100,11 +89,8 @@ public class example extends Canvas
    b1.addMouseListener(new MouseAdapter() {
 	   public void mouseClicked(MouseEvent e) {
 		   b1.setBackground(Color.red);
-		   
-		  
-		   val = true;
-		   
-	   }
+		     val = true;
+		     }
    });
    
   
@@ -114,24 +100,20 @@ public class example extends Canvas
 			 pxclick = e.getX();
 			  pyclick = e.getY();
 				  repaint();
-	//		      repaint(0,64,583,359);
-			  
+	//		      repaint(0,64,583,359);	  
 		  }
 	  }
  });
   
-   
   b2.addMouseListener(new MouseAdapter() {
 	  
 	 public void mouseClicked(MouseEvent e) {
 		val = false;
-		
 		b1.setBackground(getBackground());
-		
-         	  
+	
 	 }
 	  
-  });
+ });
   
      f.add(ControlPanel, BorderLayout.CENTER);
      
