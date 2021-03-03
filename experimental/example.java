@@ -5,6 +5,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Frame;
 import java.awt.Label;
 import java.awt.Panel;
@@ -15,14 +16,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 
 import java.awt.event.WindowAdapter;
 
 
-
-@SuppressWarnings("serial")
 public class example extends Canvas  
 
 {
@@ -109,8 +113,21 @@ public class example extends Canvas
 	  
 	 public void mouseClicked(MouseEvent e) {
 		val = false;
-		b1.setBackground(getBackground());
-	
+		b1.setBackground(b2.getBackground());
+	    dp.save=false;
+        dp.xdragPositions = null;
+        dp.xdragPositions = new ArrayList();
+        dp.ydragPositions = null;
+        dp.ydragPositions = new ArrayList();
+        dp.xclickPositions = null;
+        dp.yclickPositions = null;
+        dp.xclickPositions = new ArrayList();
+        dp.yclickPositions = new ArrayList();
+        dp.clicks =0;
+        dp.drags = -1;
+        dp.flag = false;
+        dp.isClickInitialised =false;
+        dp.repaint();
 	 }
 	  
  });
@@ -159,6 +176,10 @@ public class example extends Canvas
 			}
 			System.out.println("Lets see which icon was clicked: "+DrawFlag);
 			if(i!=1000 && i!=-1) {
+				if(DrawFlag ==0) {
+				  dp.save =true;
+				  dp.repaint();
+				}
 			g.setColor(Color.red);
 			g.fillRect(3+i*65, 3, 61, 61);    //3,3 to 2,2 and 61 widht height to 63
 			g.drawImage(this.bimg.b[i].img, 5+i*65, 5, 57, 57, this);
